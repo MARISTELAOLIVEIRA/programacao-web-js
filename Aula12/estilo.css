@@ -37,14 +37,14 @@ button {
   padding: 10px 16px;
   border: none;
   border-radius: 6px;
-  background: #0d804e;
+  background: #2e7d5b;
   color: white;
   font-size: 15px;
   cursor: pointer;
 }
 
 button:hover {
-  background: #80d3ac;
+  background: #1f6b47;
 }
 
 table {
@@ -90,4 +90,18 @@ th {
   min-height: 1.2em;
   color: #2e7d5b;
   font-weight: bold;
+}
+
+/* o campo com problema ganha borda vermelha */
+.campo-erro {
+  border-color: #c22450;
+  background: #fff5f7;
+}
+
+.aviso.erro {
+  color: #c22450;
+}
+
+.busca {
+  margin-bottom: 12px;
 }

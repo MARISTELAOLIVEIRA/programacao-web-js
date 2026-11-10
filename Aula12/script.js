@@ -9,6 +9,27 @@ const vazio = document.querySelector("#vazio");
 const form = document.querySelector("#form-aluno");
 const aviso = document.querySelector("#aviso");
 
+const busca = document.querySelector("#busca");
+
+// QUANDO o usuário digitar no campo de busca (a cada letra)
+busca.addEventListener("input", function () {
+  // em minúsculas, para "ana" achar "Ana"
+  const termo = busca.value.toLowerCase();
+
+  // filter: só os alunos cujo nome tem o termo
+  const achados = turma.filter(function (aluno) {
+    return aluno.nome.toLowerCase().includes(termo);
+  });
+
+  // a tabela mostra só os achados
+  mostrarTurma(achados);
+  if (achados.length === 0) {
+    vazio.textContent = "Nenhum aluno com \"" + busca.value + "\".";
+  } else {
+    vazio.textContent = "Nenhum aluno cadastrado.";
+  }
+});
+
 // cria uma célula com o texto
 function criarCelula(texto) {
   const celula = document.createElement("td");
@@ -41,6 +62,15 @@ function mostrarTurma(lista) {
       criarCelula(aluno.media.toFixed(1)),
       criarCelula(situacao)
     );
+    // clique duplo na linha: tira ESTE aluno da lista
+    linha.addEventListener("dblclick", function () {
+      const posicao = turma.indexOf(aluno); // em que posição ele está?
+      turma.splice(posicao, 1);             // tira 1 item nessa posição
+      aviso.classList.remove("erro");
+      aviso.textContent = aluno.nome + " saiu da turma.";
+      mostrarTurma(turma);
+    });
+
     tabela.append(linha);
   }
 }
